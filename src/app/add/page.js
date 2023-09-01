@@ -5,13 +5,12 @@ import { useRouter } from "next/navigation";
 
 export default function AddNote() {
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!title || !description) {
-      alert("Title or Description cannot be empty");
+    if (!title) {
+      alert("Title cannot be empty");
       return;
     }
 
@@ -21,7 +20,7 @@ export default function AddNote() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title, description }),
+        body: JSON.stringify({ title }),
       });
 
       if (res.ok) {
@@ -42,13 +41,6 @@ export default function AddNote() {
         className="border border-slate-100 px-8 py-2 bg-slate-300 placeholder-slate-900 placeholder-opacity-70 font-medium text-slate-900"
         type="text"
         placeholder="Notes Title"
-      />
-      <input
-        onChange={(e) => setDescription(e.target.value)}
-        value={description}
-        className="border border-slate-100 px-8 py-2 bg-slate-300 placeholder-slate-900 placeholder-opacity-70 font-medium text-slate-900"
-        type="text"
-        placeholder="Notes Description"
       />
       <button
         type="submit"

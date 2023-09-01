@@ -1,5 +1,23 @@
-import NotesList from "./NotesList";
+import Editable from "./Editable";
 
-export default function Home() {
-  return <NotesList />;
+const getNotes = async () => {
+  try {
+    const res = await fetch("http://localhost:3000/api/notes", {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error(`Failed to fetch notes. Error: ${res.status}`);
+    }
+    // const data = await res.json();
+
+    return res.json();
+  } catch (error) {
+    console.log(`Error while loading notes, ${error}`);
+  }
+};
+
+export default async function Home() {
+  const { notes } = await getNotes();
+  return <Editable notes={notes} />;
 }

@@ -11,8 +11,8 @@ export async function GET(request, { params }) {
 
 export async function PUT(request, { params }) {
   const { id } = params;
-  const { newTitle: title, newDescription: description } = await request.json();
+  const { newTitle: title } = await request.json();
   await connectMongoDB();
-  await Note.findByIdAndUpdate(id, { title, description });
+  await Note.findByIdAndUpdate(id, { title });
   return NextResponse.json({ message: "NOTE UPDATED!" }, { status: 200 });
 }
