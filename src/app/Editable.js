@@ -7,18 +7,35 @@ import RemoveBtn from "@/app/RemoveBtn";
 export default function Editable({ notes }) {
   const router = useRouter();
   const [data, setData] = useState(notes);
-  // const [isSameTitle, setIsSameTitle] = useState(true);
+  const [oldData, setOldData] = useState(null);
 
-  // useEffect(() => {
-  //   console.log("USE EFFECT");
-  //   setIsSameTitle(true);
-  // }, [data]);
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.localStorage) {
+      let foundOldData = JSON.parse(localStorage.getItem("oldData"));
+      setOldData(foundOldData);
+    }
+  }, []);
 
-  const onNotFocus = async (e, id, isSameTitle) => {
+  function isStateEqual() {
+    if (JSON.stringify(oldData) === JSON.stringify(data)) {
+      return true;
+    }
+    return false;
+  }
+
+  const onNotFocus = async (e, id) => {
     e.preventDefault();
-    console.log();
 
-    if (!(e.target.value.trim() === "")) {
+    // console.log(JSON.stringify(oldData) === JSON.stringify(data));
+    if (typeof window !== "undefined" && window.localStorage) {
+      // console.log("INSIDE");
+      localStorage.setItem("oldData", JSON.stringify(data));
+      let foundOldData = JSON.parse(localStorage.getItem("oldData"));
+      setOldData(foundOldData);
+    }
+    console.log(`IF EQUAL:\n${isStateEqual()}`);
+
+    if (!(e.target.value.trim() === "") && !isStateEqual()) {
       console.log("PUT REQUEST");
       try {
         const res = await fetch(`/api/notes/${id}`, {
@@ -62,13 +79,9 @@ export default function Editable({ notes }) {
               setData(
                 data.map((oNote) => {
                   if (oNote._id === note._id) {
-                    // Create a *new* object with changes
-                    // console.log(`CHANGED:\n${JSON.stringify(oNote)}`);
-                    // setIsSameTitle(false);
                     return { ...oNote, title: e.target.value };
                   } else {
                     // No changes
-                    // console.log(`NOT CHANGED:\n${JSON.stringify(oNote)}`);
                     return oNote;
                   }
                 })
