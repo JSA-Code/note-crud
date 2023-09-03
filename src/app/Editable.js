@@ -35,7 +35,7 @@ export default function Editable({ notes }) {
     }
     console.log(`IF EQUAL:\n${isStateEqual()}`);
 
-    if (!(e.target.value.trim() === "") && !isStateEqual()) {
+    if (e.target.value.trim() !== "" && !isStateEqual()) {
       console.log("PUT REQUEST");
       try {
         const res = await fetch(`/api/notes/${id}`, {
