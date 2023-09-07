@@ -1,11 +1,9 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import RemoveBtn from "@/app/RemoveBtn";
 
 export default function Editable({ notes }) {
-  const router = useRouter();
   const [data, setData] = useState(notes);
   const [oldData, setOldData] = useState(null);
 
@@ -49,7 +47,6 @@ export default function Editable({ notes }) {
         if (!res.ok) {
           throw new Error(`Failed to update note. Error: ${res.status}`);
         }
-        router.refresh();
       } catch (error) {
         console.log(`Error while updating note: ${error}`);
       }
@@ -70,7 +67,7 @@ export default function Editable({ notes }) {
           className="px-28 py-8 my-3 flex items-center justify-between bg-slate-700 border border-slate-300 text-slate-200 font-semibold"
         >
           <textarea
-            className="resize-none break-words hover:bg-[#d3d3d3] hover:text-slate-900 focus:text-slate-900 hover:cursor-pointer focus:bg-[#d3d3d3] bg-transparent placeholder-slate-100 placeholder-opacity-30 hover:placeholder-transparent"
+            className="transition ease-in duration-100 resize-none break-words hover:bg-[#d3d3d3] hover:text-slate-900 focus:text-slate-900 hover:cursor-pointer focus:bg-[#d3d3d3] bg-transparent placeholder-slate-100 placeholder-opacity-30 hover:placeholder-transparent"
             placeholder="Enter Title"
             type="text"
             onFocus={(e) => (e.target.placeholder = "")}

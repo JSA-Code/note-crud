@@ -9,7 +9,6 @@ const getNotes = async () => {
     if (!res.ok) {
       throw new Error(`Failed to fetch notes. Error: ${res.status}`);
     }
-    // const data = await res.json();
 
     return res.json();
   } catch (error) {
