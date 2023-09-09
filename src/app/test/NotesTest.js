@@ -1,10 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import RemoveBtn from "@/app/RemoveBtn";
+import DeleteBtn from "@/app/client/DeleteBtn";
 import { useRouter } from "next/navigation";
 
-export default function Editable({ notes }) {
+export default function NotesTest({ notes }) {
   // console.log(notes);
   // const { id, title } = notes;
   // console.log(notes[0].title);
@@ -117,7 +117,7 @@ export default function Editable({ notes }) {
             onKeyDown={onKeyDown}
             onBlur={(e) => onNotFocus(e, note._id)}
           />
-          <RemoveBtn id={note._id} />
+          <DeleteBtn id={note._id} />
         </div>
       ))}
     </>

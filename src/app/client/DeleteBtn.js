@@ -1,15 +1,16 @@
 "use client";
 
 import { HiOutlineTrash } from "react-icons/hi";
+import { deleteAction } from "@/libs/actions";
 
-export default function RemoveBtn({ id }) {
+export default function DeleteBtn({ id }) {
   const handleRemove = async () => {
     const confirmed = confirm("Are you sure you want to delete this note?");
+
     if (confirmed) {
-      const res = await fetch(`/api/notes?id=${id}`, {
-        method: "DELETE",
-      });
-      if (res.ok) {
+      const checkRes = await deleteAction(id);
+
+      if (checkRes) {
         window.location.reload();
       }
     }
