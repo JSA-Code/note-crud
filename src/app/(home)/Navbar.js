@@ -1,5 +1,5 @@
 import Link from "next/link";
-import AddBtn from "./client/AddBtn";
+import AddBtn from "./AddBtn";
 
 export default function Navbar() {
   return (

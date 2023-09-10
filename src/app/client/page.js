@@ -3,7 +3,6 @@
 import useSWR from "swr";
 import { useState, useEffect } from "react";
 import { putAction } from "@/libs/actions";
-import { useRouter } from "next/navigation";
 import DeleteBtn from "@/app/client/DeleteBtn";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
@@ -13,15 +12,11 @@ export default function HomeClient() {
   const [notes, setNotes] = useState();
   const isStateEqual = () =>
     localStorage.getItem("oldNotes") === JSON.stringify(notes);
-  // const [oldNotes, setOldNotes] = useState();
-  // const isStateEqual = () => JSON.stringify(notes) === JSON.stringify(oldNotes);
-  // const router = useRouter();
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.localStorage && data) {
-      // let foundOldNotes = JSON.parse(localStorage.getItem("oldNotes"));
       setNotes(data?.notes);
-      // setOldNotes(data?.notes);
+      localStorage.setItem("oldNotes", JSON.stringify(data?.notes));
     }
     console.log("USE EFFECT");
   }, [data]);
@@ -29,11 +24,10 @@ export default function HomeClient() {
   const onNotFocus = async (e, id) => {
     e.preventDefault();
     console.log(`IS STATE EQUAL:\n${isStateEqual()}`);
-    // console.log(
-    //   `LOCAL OLD NOTES:\n${localStorage.getItem("oldNotes") === notes}`
-    // );
-    // let foundOldNotes = JSON.parse(localStorage.getItem("oldNotes"));
-    // setOldNotes(foundOldNotes);
+
+    if (!e.target.value) {
+      e.target.placeholder = "Enter Title";
+    }
 
     if (!isStateEqual()) {
       console.log("PUT REQUEST");
@@ -41,19 +35,19 @@ export default function HomeClient() {
         const checkRes = await putAction(id, e.target.value);
 
         if (!checkRes) {
-          throw new Error(`Failed to update note ${res.status}`);
+          throw new Error(res.status);
         }
         // window.location.reload();
         // router.refresh();
+
+        if (typeof window !== "undefined" && window.localStorage) {
+          localStorage.setItem("oldNotes", JSON.stringify(notes));
+          console.log(`OLD NOTES:\n${localStorage.getItem("oldNotes")}`);
+          console.log(`NOTES:\n${JSON.stringify(notes)}`);
+        }
       } catch (error) {
         console.log(`Cannot update due to ${error}`);
       }
-    }
-
-    if (typeof window !== "undefined" && window.localStorage) {
-      localStorage.setItem("oldNotes", JSON.stringify(notes));
-      console.log(`OLD NOTES:\n${localStorage.getItem("oldNotes")}`);
-      console.log(`NOTES:\n${JSON.stringify(notes)}`);
     }
   };
 

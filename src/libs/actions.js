@@ -27,7 +27,7 @@ export async function deleteAction(id) {
 }
 
 export async function putAction(id, value) {
-  // console.log(`SERVER PUT ACTION WITH ID / INPUT VALUE: ${id}, ${value}`);
+  console.log("SERVER PUT ACTION");
 
   const res = await fetch(`${baseURL}/api/notes/${id}`, {
     method: "PUT",
