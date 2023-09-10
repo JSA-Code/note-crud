@@ -3,12 +3,14 @@
 import useSWR from "swr";
 import { useState, useEffect } from "react";
 import { putAction } from "@/libs/actions";
+import { useSession } from "next-auth/react";
 import DeleteBtn from "@/app/client/DeleteBtn";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function HomeClient() {
-  const { data, error, isLoading } = useSWR("/api/notes", fetcher);
+  const { data } = useSWR("/api/notes", fetcher);
+  const { status } = useSession();
   const [notes, setNotes] = useState();
   const isStateEqual = () =>
     localStorage.getItem("oldNotes") === JSON.stringify(notes);
@@ -42,8 +44,8 @@ export default function HomeClient() {
 
         if (typeof window !== "undefined" && window.localStorage) {
           localStorage.setItem("oldNotes", JSON.stringify(notes));
-          console.log(`OLD NOTES:\n${localStorage.getItem("oldNotes")}`);
-          console.log(`NOTES:\n${JSON.stringify(notes)}`);
+          // console.log(`OLD NOTES:\n${localStorage.getItem("oldNotes")}`);
+          // console.log(`NOTES:\n${JSON.stringify(notes)}`);
         }
       } catch (error) {
         console.log(`Cannot update due to ${error}`);
@@ -56,6 +58,26 @@ export default function HomeClient() {
       e.target.blur();
     }
   };
+
+  if (status === "loading") {
+    return (
+      <p className="flex justify-center items-center mt-28 text-center font-semibold">
+        Hang on there...
+      </p>
+    );
+  }
+
+  if (status !== "authenticated") {
+    return (
+      <div className="flex justify-center items-center mt-28 text-center font-semibold">
+        <p className="pulse-animation">
+          Not signed in.
+          <br />
+          Please sign in to continue
+        </p>
+      </div>
+    );
+  }
 
   return (
     <>

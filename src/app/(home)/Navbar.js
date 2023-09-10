@@ -1,9 +1,10 @@
 import Link from "next/link";
 import AddBtn from "./AddBtn";
+import SignInBtn from "./SignInBtn";
 
 export default function Navbar() {
   return (
-    <nav className="flex justify-center gap-10 items-center bg-slate-700 px-6 py-3 ">
+    <nav className="flex justify-around items-center bg-slate-700 px-6 py-3 ">
       <Link href="/" className="font-bold">
         Home
       </Link>
@@ -14,6 +15,7 @@ export default function Navbar() {
         Server
       </Link>
       <AddBtn />
+      <SignInBtn />
     </nav>
   );
 }
