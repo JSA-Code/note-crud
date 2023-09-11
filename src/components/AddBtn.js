@@ -2,7 +2,6 @@
 
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { postAction } from "@/libs/actions";
 
 export default function AddBtn() {
   let [isOpen, setIsOpen] = useState(false);
@@ -26,9 +25,15 @@ export default function AddBtn() {
     }
 
     try {
-      const checkRes = await postAction(title);
+      const res = await fetch("/api/notes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ title }),
+      });
 
-      if (checkRes) {
+      if (res.ok) {
         closeModal();
         window.location.reload();
       } else {

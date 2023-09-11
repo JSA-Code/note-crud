@@ -3,7 +3,7 @@
 import { useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useRouter } from "next/navigation";
-import { putAction } from "@/libs/actions";
+// import { putAction } from "@/libs/actions";
 import { HiPencilAlt } from "react-icons/hi";
 
 export default function EditBtn({ note }) {
@@ -32,11 +32,13 @@ export default function EditBtn({ note }) {
     if (title !== oldTitle) {
       console.log("PUT REQUEST");
       try {
-        const checkRes = await putAction(note._id, title);
-
-        if (!checkRes) {
-          throw new Error(res.status);
-        }
+        await fetch("/api/notes", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: note._id, newTitle: title }),
+        });
 
         setOldTitle(title);
         router.refresh();

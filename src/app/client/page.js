@@ -2,14 +2,13 @@
 
 import useSWR from "swr";
 import { useState, useEffect } from "react";
-import { putAction } from "@/libs/actions";
 import { useSession } from "next-auth/react";
-import DeleteBtn from "@/app/client/DeleteBtn";
+import DeleteBtn from "@/components/DeleteBtn";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function HomeClient() {
-  const { data } = useSWR("/api/notes", fetcher);
+  const { data, isLoading } = useSWR("/api/notes", fetcher);
   const { status } = useSession();
   const [notes, setNotes] = useState();
   const isStateEqual = () =>
@@ -34,11 +33,13 @@ export default function HomeClient() {
     if (!isStateEqual()) {
       console.log("PUT REQUEST");
       try {
-        const checkRes = await putAction(id, e.target.value);
-
-        if (!checkRes) {
-          throw new Error(res.status);
-        }
+        await fetch("/api/notes/", {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id: id, newTitle: e.target.value }),
+        });
         // window.location.reload();
         // router.refresh();
 
@@ -62,7 +63,7 @@ export default function HomeClient() {
   if (status === "loading") {
     return (
       <p className="flex justify-center items-center mt-28 text-center font-semibold">
-        Hang on there...
+        Authenticating...
       </p>
     );
   }
@@ -76,6 +77,14 @@ export default function HomeClient() {
           Please sign in to continue
         </p>
       </div>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <p className="flex justify-center items-center mt-28 text-center font-semibold">
+        Loading data...
+      </p>
     );
   }
 

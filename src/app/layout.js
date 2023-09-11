@@ -1,6 +1,6 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Navbar from "./(home)/Navbar";
+import Navbar from "@/components/Navbar";
 import SessionProvider from "@/libs/SessionProvider";
 
 const inter = Inter({ subsets: ["latin"] });

@@ -1,12 +1,11 @@
 // import Notes from "../client/Notes";
 import { getServerSession } from "next-auth";
 import Note from "@/models/note";
-import DeleteBtn from "@/app/client/DeleteBtn";
+import DeleteBtn from "@/components/DeleteBtn";
 import EditBtn from "./EditBtn";
 
 export default async function HomeServer() {
   const session = await getServerSession();
-  // const { notes } = await getNotes();
 
   if (!session) {
     return (
