@@ -121,6 +121,35 @@ export default function HomeClient() {
     );
   }
 
+  const notesList = notes?.map((note) => (
+    <li key={note._id}>
+      <div className="px-10 py-8 my-3 flex items-center bg-slate-700 border text-slate-200 font-semibold">
+        <textarea
+          className="transition ease-in duration-100 resize-none break-words hover:bg-[#d3d3d3] hover:text-slate-900 focus:text-slate-900 hover:cursor-pointer focus:bg-[#d3d3d3] bg-transparent placeholder-slate-100 placeholder-opacity-30 hover:placeholder-transparent"
+          placeholder="Enter Title"
+          type="text"
+          onFocus={(e) => (e.target.placeholder = "")}
+          value={note.title}
+          onChange={(e) =>
+            setNotes(
+              notes.map((oNote) => {
+                if (oNote._id === note._id) {
+                  return { ...oNote, title: e.target.value };
+                } else {
+                  // No changes
+                  return oNote;
+                }
+              })
+            )
+          }
+          onKeyDown={onKeyDown}
+          onBlur={(e) => onNotFocus(e, note._id)}
+        />
+        <DeleteBtn id={note._id} />
+      </div>
+    </li>
+  ));
+
   return (
     <div className="flex mt-10">
       <p className="font-bold">
@@ -134,37 +163,7 @@ export default function HomeClient() {
         clicks outside of the textarea and the onKeyDown event handler which is
         activated when the user presses the Enter or Escape key.
       </p>
-      <ul className="flex flex-col items-center justify-center">
-        {notes?.map((note) => (
-          <div
-            key={note._id}
-            className="px-10 py-8 my-3 flex items-center bg-slate-700 border text-slate-200 font-semibold"
-          >
-            <textarea
-              className="transition ease-in duration-100 resize-none break-words hover:bg-[#d3d3d3] hover:text-slate-900 focus:text-slate-900 hover:cursor-pointer focus:bg-[#d3d3d3] bg-transparent placeholder-slate-100 placeholder-opacity-30 hover:placeholder-transparent"
-              placeholder="Enter Title"
-              type="text"
-              onFocus={(e) => (e.target.placeholder = "")}
-              value={note.title}
-              onChange={(e) =>
-                setNotes(
-                  notes.map((oNote) => {
-                    if (oNote._id === note._id) {
-                      return { ...oNote, title: e.target.value };
-                    } else {
-                      // No changes
-                      return oNote;
-                    }
-                  })
-                )
-              }
-              onKeyDown={onKeyDown}
-              onBlur={(e) => onNotFocus(e, note._id)}
-            />
-            <DeleteBtn id={note._id} />
-          </div>
-        ))}
-      </ul>
+      <ul className="flex flex-col items-center justify-center">{notesList}</ul>
     </div>
   );
 }

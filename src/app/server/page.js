@@ -21,25 +21,25 @@ export default async function HomeServer() {
 
   const notes = JSON.parse(JSON.stringify(await Note.find({})));
   // console.log(`DATA\n${JSON.stringify(notes)}`);
+
+  const listNotes = notes.map((note) => (
+    <li key={note._id}>
+      <div className="px-28 py-8 my-3 flex justify-between items-center bg-slate-700 text-slate-200 font-semibold border">
+        <div className="resize-none break-words bg-transparent placeholder-slate-100 placeholder-opacity-30">
+          {note.title}
+        </div>
+        <EditBtn note={note} />
+        <DeleteBtn id={note._id} />
+      </div>
+    </li>
+  ));
+
   return (
     <div className="flex mt-10">
       <p className="font-bold">
         Here we are performing server-side data fetching.
       </p>
-      <ul className="flex flex-col items-center justify-center">
-        {notes.map((note) => (
-          <div
-            key={note._id}
-            className="px-28 py-8 my-3 flex justify-between items-center bg-slate-700 text-slate-200 font-semibold border"
-          >
-            <div className="resize-none break-words bg-transparent placeholder-slate-100 placeholder-opacity-30">
-              {note.title}
-            </div>
-            <EditBtn note={note} />
-            <DeleteBtn id={note._id} />
-          </div>
-        ))}
-      </ul>
+      <ul className="flex flex-col items-center justify-center">{listNotes}</ul>
     </div>
   );
 }
