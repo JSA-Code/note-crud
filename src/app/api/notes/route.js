@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
 
-connectMongoDB();
+await connectMongoDB();
 // const session = await getServerSession(authOptions);
 
 export async function GET() {
@@ -51,6 +51,7 @@ export async function DELETE(request) {
 export async function PUT(request) {
   const session = await getServerSession(authOptions);
   console.log(`SESSION IN PUT()\n${JSON.stringify(session)}`);
+  console.log(`REQ JSON\n${JSON.stringify(await request.json())}`);
 
   if (!session) {
     return NextResponse.json({

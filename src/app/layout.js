@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
         <SessionProvider>
           <div className="p-4 max-w-2xl mx-auto">
             <Navbar />
-            <div className="mt-8">{children}</div>
+            {children}
           </div>
         </SessionProvider>
       </body>
