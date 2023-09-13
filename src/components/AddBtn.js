@@ -1,11 +1,18 @@
 "use client";
 
+import { useSession } from "next-auth/react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
 export default function AddBtn() {
+  const { data: session } = useSession();
   let [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
+  // const notify = () => {
+  //   toast("Updated Successfully!");
+  // };
 
   function closeModal() {
     setIsOpen(false);
@@ -30,12 +37,13 @@ export default function AddBtn() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ title }),
+        body: JSON.stringify({ title, email: session.user.email }),
       });
 
       if (res.ok) {
         closeModal();
         window.location.reload();
+        // notify();
       } else {
         throw new Error(`Failed to create note with status ${res.status}`);
       }
@@ -46,14 +54,16 @@ export default function AddBtn() {
 
   return (
     <>
-      <button
-        type="button"
-        onClick={openModal}
-        className="rounded-md bg-slate-200 bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
-      >
-        Add Note
-      </button>
-
+      {session && (
+        <button
+          type="button"
+          onClick={openModal}
+          className="rounded-xl bg-slate-200 bg-opacity-20 px-2 py-1 text-base font-bold text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+        >
+          Add Note
+        </button>
+      )}
+      {/* <ToastContainer /> */}
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={closeModal}>
           <Transition.Child

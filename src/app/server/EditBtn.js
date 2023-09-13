@@ -3,14 +3,18 @@
 import { useState, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { useRouter } from "next/navigation";
-// import { putAction } from "@/libs/actions";
 import { HiPencilAlt } from "react-icons/hi";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function EditBtn({ note }) {
   let [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState(note.title);
   const [oldTitle, setOldTitle] = useState(note.title);
   const router = useRouter();
+  const notify = () => {
+    toast("Updated Successfully!");
+  };
 
   // console.log(`NOTE:\n${JSON.stringify(note._id)}`);
 
@@ -40,6 +44,7 @@ export default function EditBtn({ note }) {
           body: JSON.stringify({ id: note._id, newTitle: title }),
         });
 
+        notify();
         setOldTitle(title);
         router.refresh();
       } catch (error) {
@@ -50,7 +55,8 @@ export default function EditBtn({ note }) {
   };
 
   return (
-    <div>
+    <>
+      <ToastContainer />
       <button
         onClick={openModal}
         className="font-bold text-white py-3 px-6 w-fit"
@@ -124,6 +130,6 @@ export default function EditBtn({ note }) {
           </div>
         </Dialog>
       </Transition>
-    </div>
+    </>
   );
 }

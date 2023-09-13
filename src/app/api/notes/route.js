@@ -20,13 +20,25 @@ export async function GET() {
     });
   }
 
-  const notes = await Note.find({});
-  return NextResponse.json({ notes, session });
+  const notes = await Note.find({ email: session.user.email });
+  return NextResponse.json({ notes });
 }
 
 export async function POST(request) {
-  const { title } = await request.json();
-  await Note.create({ title });
+  // const session = await getServerSession(authOptions);
+
+  // console.log(`SESSION IN POST()\n${JSON.stringify(session)}`);
+
+  // if (!session) {
+  //   return NextResponse.json({
+  //     status: "fail",
+  //     message: "You are not logged in",
+  //     status: 401,
+  //   });
+  // }
+
+  const { title, email } = await request.json();
+  await Note.create({ title, email });
   return NextResponse.json({ message: "NOTE CREATED!" }, { status: 201 });
 }
 
@@ -49,17 +61,17 @@ export async function DELETE(request) {
 }
 
 export async function PUT(request) {
-  const session = await getServerSession(authOptions);
-  console.log(`SESSION IN PUT()\n${JSON.stringify(session)}`);
-  console.log(`REQ JSON\n${JSON.stringify(await request.json())}`);
+  // const session = await getServerSession(authOptions);
+  // console.log(`SESSION IN PUT()\n${JSON.stringify(session)}`);
+  // console.log(`REQ JSON\n${JSON.stringify(await request.json())}`);
 
-  if (!session) {
-    return NextResponse.json({
-      status: "fail",
-      message: "You are not logged in",
-      status: 401,
-    });
-  }
+  // if (!session) {
+  //   return NextResponse.json({
+  //     status: "fail",
+  //     message: "You are not logged in",
+  //     status: 401,
+  //   });
+  // }
 
   const { id, newTitle: title } = await request.json();
   await Note.findByIdAndUpdate(id, { title });

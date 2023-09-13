@@ -4,6 +4,8 @@ import useSWR from "swr";
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import DeleteBtn from "@/components/DeleteBtn";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
@@ -11,6 +13,9 @@ export default function HomeClient() {
   const { data, isLoading } = useSWR("/api/notes", fetcher);
   const { status } = useSession();
   const [notes, setNotes] = useState();
+  const notify = () => {
+    toast("Updated Successfully!");
+  };
   const isStateEqual = () =>
     localStorage.getItem("oldNotes") === JSON.stringify(notes);
 
@@ -42,7 +47,7 @@ export default function HomeClient() {
         });
         // window.location.reload();
         // router.refresh();
-
+        notify();
         if (typeof window !== "undefined" && window.localStorage) {
           localStorage.setItem("oldNotes", JSON.stringify(notes));
           // console.log(`OLD NOTES:\n${localStorage.getItem("oldNotes")}`);
@@ -151,19 +156,23 @@ export default function HomeClient() {
   ));
 
   return (
-    <div className="flex mt-10">
-      <p className="font-bold">
-        This is a protected page provided by NextAuthJs. Our API is also
-        protected to ensure that only authenticated users can access it. Here we
-        are performing client-side data fetching by utilizing useSWR and our
-        API. It also has the ability to store data in local storage and compare
-        it to the current state of the data. If the data is different, then we
-        make a PUT request to update the data in the MongoDB database. To save
-        the data, we use the onBlur event handler to save the data when the user
-        clicks outside of the textarea and the onKeyDown event handler which is
-        activated when the user presses the Enter or Escape key.
-      </p>
-      <ul className="flex flex-col items-center justify-center">{notesList}</ul>
-    </div>
+    <>
+      <ToastContainer />
+      <div className="flex gap-10 mt-10">
+        <p className="font-bold">
+          This is a protected page provided by NextAuthJs. Our API is also
+          protected to ensure that only authenticated users can access it. Here
+          we are performing client-side data fetching by utilizing useSWR and
+          our API on the server. It also has the ability to store data in local
+          storage and compare it to the current state of the data. If the data
+          is different, then we make a PUT request to update the data in the
+          MongoDB database. To save the data, we use the onBlur event handler to
+          save the data when the user clicks outside of the textarea and we can
+          also use the onKeyDown event handler which is activated when the user
+          presses the Enter or Escape key.
+        </p>
+        <ul className="flex flex-col items-baseline">{notesList}</ul>
+      </div>
+    </>
   );
 }

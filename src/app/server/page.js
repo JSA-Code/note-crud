@@ -3,9 +3,15 @@ import { getServerSession } from "next-auth";
 import Note from "@/models/note";
 import DeleteBtn from "@/components/DeleteBtn";
 import EditBtn from "./EditBtn";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 
 export default async function HomeServer() {
   const session = await getServerSession();
+  // const notify = async () => {
+  //   "use server";
+  //   return toast("Wow so easy !");
+  // };
 
   if (!session) {
     return (
@@ -19,7 +25,9 @@ export default async function HomeServer() {
     );
   }
 
-  const notes = JSON.parse(JSON.stringify(await Note.find({})));
+  const notes = JSON.parse(
+    JSON.stringify(await Note.find({ email: session.user.email }))
+  );
   // console.log(`DATA\n${JSON.stringify(notes)}`);
 
   const listNotes = notes.map((note) => (
@@ -30,16 +38,18 @@ export default async function HomeServer() {
         </div>
         <EditBtn note={note} />
         <DeleteBtn id={note._id} />
+        {/* <EditBtn note={note} notify={notify} /> */}
+        {/* <ToastContainer /> */}
       </div>
     </li>
   ));
 
   return (
-    <div className="flex mt-10">
+    <div className="flex gap-10 mt-10">
       <p className="font-bold">
         Here we are performing server-side data fetching.
       </p>
-      <ul className="flex flex-col items-center justify-center">{listNotes}</ul>
+      <ul className="flex flex-col items-center">{listNotes}</ul>
     </div>
   );
 }
