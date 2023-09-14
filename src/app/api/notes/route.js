@@ -45,7 +45,7 @@ export async function POST(request) {
 export async function DELETE(request) {
   const session = await getServerSession(authOptions);
 
-  console.log(`SESSION IN DELETE()\n${JSON.stringify(session)}`);
+  // console.log(`SESSION IN DELETE()\n${JSON.stringify(session)}`);
 
   if (!session) {
     return NextResponse.json({
