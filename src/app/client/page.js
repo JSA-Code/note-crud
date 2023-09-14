@@ -14,7 +14,7 @@ export default function HomeClient() {
   const { status } = useSession();
   const [notes, setNotes] = useState();
   const notify = () => {
-    toast("Updated Successfully!");
+    toast.success("Updated Successfully!");
   };
   const isStateEqual = () =>
     localStorage.getItem("oldNotes") === JSON.stringify(notes);
@@ -24,19 +24,19 @@ export default function HomeClient() {
       setNotes(data?.notes);
       localStorage.setItem("oldNotes", JSON.stringify(data?.notes));
     }
-    console.log("USE EFFECT");
+    // console.log("USE EFFECT");
   }, [data]);
 
   const onNotFocus = async (e, id) => {
     e.preventDefault();
-    console.log(`IS STATE EQUAL:\n${isStateEqual()}`);
+    // console.log(`IS STATE EQUAL:\n${isStateEqual()}`);
 
     if (!e.target.value) {
       e.target.placeholder = "Enter Title";
     }
 
     if (!isStateEqual()) {
-      console.log("PUT REQUEST");
+      // console.log("PUT REQUEST");
       try {
         await fetch("/api/notes/", {
           method: "PUT",
@@ -157,7 +157,18 @@ export default function HomeClient() {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <div className="flex gap-10 mt-10">
         <p className="font-bold">
           This is a protected page provided by NextAuthJs. Our API is also

@@ -1,4 +1,7 @@
 import { Schema, models, model } from "mongoose";
+import { connectMongoDB } from "@/libs/mongodb";
+
+await connectMongoDB();
 
 const NoteSchema = new Schema(
   {

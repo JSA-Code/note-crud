@@ -13,7 +13,7 @@ export default function EditBtn({ note }) {
   const [oldTitle, setOldTitle] = useState(note.title);
   const router = useRouter();
   const notify = () => {
-    toast("Updated Successfully!");
+    toast.success("Updated Successfully!");
   };
 
   // console.log(`NOTE:\n${JSON.stringify(note._id)}`);
@@ -31,10 +31,10 @@ export default function EditBtn({ note }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(`DOES TITLE MATCH:\n${title === oldTitle}`);
+    // console.log(`DOES TITLE MATCH:\n${title === oldTitle}`);
 
     if (title !== oldTitle) {
-      console.log("PUT REQUEST");
+      // console.log("PUT REQUEST");
       try {
         await fetch("/api/notes", {
           method: "PUT",
@@ -56,7 +56,18 @@ export default function EditBtn({ note }) {
 
   return (
     <>
-      <ToastContainer />
+      <ToastContainer
+        position="bottom-right"
+        autoClose={1500}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <button
         onClick={openModal}
         className="font-bold text-white py-3 px-6 w-fit"

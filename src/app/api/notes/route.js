@@ -1,10 +1,8 @@
-import { connectMongoDB } from "@/libs/mongodb";
 import Note from "@/models/note";
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]/route";
 
-await connectMongoDB();
 // const session = await getServerSession(authOptions);
 
 export async function GET() {
@@ -20,6 +18,7 @@ export async function GET() {
     });
   }
 
+  console.log("GET REQ ROUTE.JS");
   const notes = await Note.find({ email: session.user.email });
   return NextResponse.json({ notes });
 }
@@ -37,6 +36,7 @@ export async function POST(request) {
   //   });
   // }
 
+  console.log("POST REQ ROUTE.JS");
   const { title, email } = await request.json();
   await Note.create({ title, email });
   return NextResponse.json({ message: "NOTE CREATED!" }, { status: 201 });
@@ -55,6 +55,7 @@ export async function DELETE(request) {
     });
   }
 
+  console.log("DELETE REQ ROUTE.JS");
   const id = request.nextUrl.searchParams.get("id");
   await Note.findByIdAndDelete(id);
   return NextResponse.json({ message: "NOTE DELETED!" }, { status: 200 });
