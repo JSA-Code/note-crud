@@ -9,6 +9,12 @@ export default function Navbar() {
         Home
       </Link>
       <Link
+        href="/local"
+        className="font-bold hover:text-slate-400 duration-75"
+      >
+        Local
+      </Link>
+      <Link
         href="/client"
         className="font-bold hover:text-slate-400 duration-75"
       >

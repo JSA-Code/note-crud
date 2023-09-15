@@ -3,10 +3,12 @@
 import { useSession } from "next-auth/react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+import { usePathname } from "next/navigation";
 // import { ToastContainer, toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 
 export default function AddBtn() {
+  const pathname = usePathname();
   const { data: session } = useSession();
   let [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
@@ -54,7 +56,7 @@ export default function AddBtn() {
 
   return (
     <>
-      {session && (
+      {session && pathname !== "/local" && (
         <button
           type="button"
           onClick={openModal}

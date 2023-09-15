@@ -45,14 +45,14 @@ export default function HomeClient() {
           },
           body: JSON.stringify({ id, newTitle: e.target.value }),
         });
-        // window.location.reload();
-        // router.refresh();
+
         notify();
-        if (typeof window !== "undefined" && window.localStorage) {
-          localStorage.setItem("oldNotes", JSON.stringify(notes));
-          // console.log(`OLD NOTES:\n${localStorage.getItem("oldNotes")}`);
-          // console.log(`NOTES:\n${JSON.stringify(notes)}`);
-        }
+
+        // if (typeof window !== "undefined" && window.localStorage) {
+        localStorage.setItem("oldNotes", JSON.stringify(notes));
+        // console.log(`OLD NOTES:\n${localStorage.getItem("oldNotes")}`);
+        // console.log(`NOTES:\n${JSON.stringify(notes)}`);
+        // }
       } catch (error) {
         console.log(`Cannot update due to ${error}`);
       }
