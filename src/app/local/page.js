@@ -17,8 +17,7 @@ export default function HomeLocal() {
   };
 
   useEffect(() => {
-    const data = JSON.parse(localStorage.getItem("LocalNotes"));
-
+    const data = JSON.parse(localStorage.getItem("LocalNotes")) || [];
     if (typeof window !== "undefined" && window.localStorage) {
       setNotes(data);
     }
@@ -47,6 +46,7 @@ export default function HomeLocal() {
       notify();
       // if (typeof window !== "undefined" && window.localStorage) {
       localStorage.setItem("LocalNotes", JSON.stringify(notes));
+      // }
       // console.log(`NOTES:\n${JSON.stringify(notes)}`);
       // }
     }
@@ -60,9 +60,9 @@ export default function HomeLocal() {
 
   const localHandleSubmit = (e) => {
     e.preventDefault();
+    setNotes([...notes, title]);
     localStorage.setItem("LocalNotes", JSON.stringify([...notes, title]));
     closeModal();
-    // window.location.reload();
   };
 
   const notesList = notes?.map((note, index) => (
@@ -78,7 +78,6 @@ export default function HomeLocal() {
             setNotes(
               notes.map((oNote, i) => {
                 if (index === i) {
-                  // return [...oNote, e.target.value];
                   return e.target.value;
                 } else {
                   // No changes
@@ -113,7 +112,7 @@ export default function HomeLocal() {
       <button
         type="button"
         onClick={openModal}
-        className="rounded-xl bg-slate-200 bg-opacity-20 px-2 py-1 mt-4 text-base font-bold text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+        className="rounded-xl bg-blue-200 bg-opacity-20 px-2 py-1 mt-4 text-base font-bold text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
       >
         Local Add Note
       </button>
