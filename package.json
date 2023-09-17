@@ -26,7 +26,11 @@
   },
   "devDependencies": {
     "@auth/mongodb-adapter": "^1.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-tailwindcss": "^3.13.0",
     "mongodb": "^5.8.1",
-    "nodemailer": "^6.9.4"
+    "nodemailer": "^6.9.4",
+    "prettier": "^3.0.3",
+    "prettier-plugin-tailwindcss": "^0.5.4"
   }
 }

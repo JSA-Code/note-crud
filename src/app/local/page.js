@@ -67,9 +67,9 @@ export default function HomeLocal() {
 
   const notesList = notes?.map((note, index) => (
     <li key={index}>
-      <div className="px-10 py-8 my-3 flex items-center bg-slate-700 border text-slate-200 font-semibold">
+      <div className="my-3 flex items-center border bg-slate-700 px-10 py-8 font-semibold text-slate-200">
         <textarea
-          className="transition ease-in duration-100 resize-none break-words hover:bg-[#d3d3d3] hover:text-slate-900 focus:text-slate-900 hover:cursor-pointer focus:bg-[#d3d3d3] bg-transparent placeholder-slate-100 placeholder-opacity-30 hover:placeholder-transparent"
+          className="resize-none break-words bg-transparent placeholder-slate-100 placeholder-opacity-30 transition duration-100 ease-in hover:cursor-pointer hover:bg-[#d3d3d3] hover:text-slate-900 hover:placeholder-transparent focus:bg-[#d3d3d3] focus:text-slate-900"
           placeholder="Enter Title"
           type="text"
           onFocus={(e) => (e.target.placeholder = "")}
@@ -83,7 +83,7 @@ export default function HomeLocal() {
                   // No changes
                   return oNote;
                 }
-              })
+              }),
             )
           }
           onKeyDown={onKeyDown}
@@ -112,12 +112,12 @@ export default function HomeLocal() {
       <button
         type="button"
         onClick={openModal}
-        className="rounded-xl bg-blue-200 bg-opacity-20 px-2 py-1 mt-4 text-base font-bold text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+        className="mt-4 rounded-xl bg-blue-200 bg-opacity-20 px-2 py-1 text-base font-bold text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
       >
         Local Add Note
       </button>
 
-      <div className="flex gap-10 mt-10">
+      <div className="mt-10 flex gap-10">
         <p className="font-bold">
           This is not a protected page provided by NextAuthJs. We are using
           local storage to store the data
@@ -141,7 +141,7 @@ export default function HomeLocal() {
 
           <div className="fixed inset-0 overflow-y-auto">
             {/* min-h-full items-center */}
-            <div className="flex mt-28 justify-center p-4 text-center">
+            <div className="mt-28 flex justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -166,13 +166,13 @@ export default function HomeLocal() {
                       <input
                         onChange={(e) => setTitle(e.target.value)}
                         value={title}
-                        className="border border-slate-100 px-8 py-2 bg-slate-300 placeholder-slate-900 placeholder-opacity-70 font-medium text-slate-900"
+                        className="border border-slate-100 bg-slate-300 px-8 py-2 font-medium text-slate-900 placeholder-slate-900 placeholder-opacity-70"
                         type="text"
                         placeholder="Notes Title"
                       />
                       <button
                         type="submit"
-                        className="inline-flex justify-center rounded-md border border-transparent bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-100 hover:text-slate-900 hover:bg-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-100 hover:bg-slate-500 hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
                       >
                         Submit
                       </button>

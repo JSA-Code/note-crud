@@ -15,7 +15,7 @@ export default async function HomeServer() {
 
   if (!session) {
     return (
-      <div className="flex justify-center items-center mt-28 text-center font-semibold">
+      <div className="mt-28 flex items-center justify-center text-center font-semibold">
         <p className="pulse-animation">
           Not signed in.
           <br />
@@ -26,14 +26,14 @@ export default async function HomeServer() {
   }
 
   const notes = JSON.parse(
-    JSON.stringify(await Note.find({ email: session.user.email }))
+    JSON.stringify(await Note.find({ email: session.user.email })),
   );
   // console.log(`DATA\n${JSON.stringify(notes)}`);
 
   const listNotes = notes.map((note) => (
     <li key={note._id}>
-      <div className="px-28 py-8 my-3 flex justify-between items-center bg-slate-700 text-slate-200 font-semibold border">
-        <div className="resize-none break-words bg-transparent placeholder-slate-100 placeholder-opacity-30">
+      <div className="my-3 flex items-center justify-between border bg-slate-700 px-28 py-8 font-semibold text-slate-200">
+        <div className="resize-none break-words bg-transparent placeholder:text-slate-100 placeholder:text-opacity-30">
           {note.title}
         </div>
         <EditBtn note={note} />
@@ -45,7 +45,7 @@ export default async function HomeServer() {
   ));
 
   return (
-    <div className="flex gap-10 mt-10">
+    <div className="mt-10 flex gap-10">
       <p className="font-bold">
         Here we are performing server-side data fetching.
       </p>

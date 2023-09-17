@@ -86,7 +86,7 @@ export default function AddBtn() {
 
           <div className="fixed inset-0 overflow-y-auto">
             {/* min-h-full items-center */}
-            <div className="flex mt-28 justify-center p-4 text-center">
+            <div className="mt-28 flex justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -96,7 +96,7 @@ export default function AddBtn() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-slate-700 p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md overflow-hidden rounded-2xl bg-slate-700 p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-100"
@@ -111,13 +111,13 @@ export default function AddBtn() {
                       <input
                         onChange={(e) => setTitle(e.target.value)}
                         value={title}
-                        className="border border-slate-100 px-8 py-2 bg-slate-300 placeholder-slate-900 placeholder-opacity-70 font-medium text-slate-900"
+                        className="border border-slate-100 bg-slate-300 px-8 py-2 font-medium text-slate-900 placeholder-opacity-70 placeholder:text-slate-900"
                         type="text"
                         placeholder="Notes Title"
                       />
                       <button
                         type="submit"
-                        className="inline-flex justify-center rounded-md border border-transparent bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-100 hover:text-slate-900 hover:bg-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-100 hover:bg-slate-500 hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
                       >
                         Submit
                       </button>
