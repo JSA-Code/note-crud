@@ -24,22 +24,38 @@ export async function GET() {
 }
 
 export async function POST(request) {
+  const { title, email } = await request.json();
   // const session = await getServerSession(authOptions);
 
   // console.log(`SESSION IN POST()\n${JSON.stringify(session)}`);
 
   // if (!session) {
   //   return NextResponse.json({
-  //     status: "fail",
   //     message: "You are not logged in",
-  //     status: 401,
-  //   });
+  //   }, { status: 401 });
   // }
 
   console.log("POST REQ ROUTE.JS");
-  const { title, email } = await request.json();
+
+  // const notes = await Note.find({ email: session.user.email });
+
+  // get count  of notes from database with email of user
+  const notes = await Note.find({ email }).countDocuments();
+  // console.log(`NOTES COUNT\n${notes}`);
+  // console.log(`IS NOTES > 10\n${notes > 10}`);
+  // console.log(`email\n${JSON.stringify({ email })}`);
+
+  if (notes > 10) {
+    return NextResponse.json(
+      {
+        message: "You have reached the maximum number of notes",
+      },
+      { status: 401 }
+    );
+  }
+
   await Note.create({ title, email });
-  return NextResponse.json({ message: "NOTE CREATED!" }, { status: 201 });
+  return NextResponse.json({ message: "NOTE CREATED!" }, { status: 200 });
 }
 
 export async function DELETE(request) {
@@ -48,11 +64,12 @@ export async function DELETE(request) {
   // console.log(`SESSION IN DELETE()\n${JSON.stringify(session)}`);
 
   if (!session) {
-    return NextResponse.json({
-      status: "fail",
-      message: "You are not logged in",
-      status: 401,
-    });
+    return NextResponse.json(
+      {
+        message: "You are not logged in",
+      },
+      { status: 401 }
+    );
   }
 
   console.log("DELETE REQ ROUTE.JS");

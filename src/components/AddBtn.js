@@ -42,12 +42,16 @@ export default function AddBtn() {
         body: JSON.stringify({ title, email: session.user.email }),
       });
 
+      // console.log(`RES OK\n${res.ok}`);
+      // console.log(res);
+
       if (res.ok) {
-        closeModal();
         window.location.reload();
         // notify();
       } else {
-        throw new Error(`Failed to create note with status ${res.status}`);
+        closeModal();
+        const { message } = await res.json();
+        alert(message);
       }
     } catch (error) {
       alert(error.message);
