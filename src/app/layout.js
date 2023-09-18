@@ -13,6 +13,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <meta name="viewport" content="width=device-width, user-scalable=no" />
       <body className={`${inter.className} bg-gray-900 text-slate-50`}>
         <SessionProvider>
           <>
