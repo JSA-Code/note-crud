@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 import { usePathname } from "next/navigation";
+import { HiPlusCircle } from "react-icons/hi2";
 // import { ToastContainer, toast } from "react-toastify";
 // import "react-toastify/dist/ReactToastify.css";
 
@@ -64,9 +65,13 @@ export default function AddBtn() {
         <button
           type="button"
           onClick={openModal}
-          className="rounded-xl bg-slate-200 bg-opacity-20 px-2 py-1 text-base font-bold text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+          className=""
+          // className="rounded-xl bg-slate-200 bg-opacity-20 px-2 py-1 text-base font-bold text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
         >
-          Add Note
+          <div className="flex flex-col items-center">
+            <HiPlusCircle size={35} />
+            <span className="text-center text-sm font-semibold">Add</span>
+          </div>
         </button>
       )}
       {/* <ToastContainer /> */}

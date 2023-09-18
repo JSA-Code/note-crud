@@ -5,12 +5,11 @@ import { getServerSession } from "next-auth";
 export default async function Home() {
   const session = await getServerSession();
   return (
-    <>
-      <div>
-        <h2 className="mt-14 text-center text-lg font-semibold">
-          Please press on the links above to view server and client pages
-        </h2>
-      </div>
+    // <div className="mx-auto flex max-w-2xl flex-col">
+    <div className="mx-auto max-w-2xl">
+      <h2 className="mt-14 text-center text-lg font-semibold">
+        Please press on the links above to view server and client pages
+      </h2>
 
       <div className="flex min-h-full flex-col justify-center bg-slate-300 px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -21,6 +20,6 @@ export default async function Home() {
           {!session && <SignUpBtn />}
         </div>
       </div>
-    </>
+    </div>
   );
 }
