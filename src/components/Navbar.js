@@ -27,7 +27,7 @@ export default function Navbar() {
     <div className="mx-auto bg-gray-800 px-2">
       <div className="hidden sm:block">
         <div className="flex items-center justify-center space-x-10">
-          <HiMiniCircleStack className="h-8 w-auto" />
+          <HiMiniCircleStack size={30} />
           {navigation.map((item) => (
             <Link
               key={item.name}

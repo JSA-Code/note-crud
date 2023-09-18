@@ -68,7 +68,7 @@ export default function AddBtn() {
           className=""
           // className="rounded-xl bg-slate-200 bg-opacity-20 px-2 py-1 text-base font-bold text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
         >
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center text-slate-50 hover:text-slate-300">
             <HiPlusCircle size={35} />
             <span className="text-center text-sm font-semibold">Add</span>
           </div>
@@ -86,7 +86,7 @@ export default function AddBtn() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-slate-900 bg-opacity-50 backdrop-blur-md" />
+            <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-md" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">

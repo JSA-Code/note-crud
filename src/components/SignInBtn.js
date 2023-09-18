@@ -10,7 +10,7 @@ export default function SignInBtn() {
 
   return (
     <>
-      <Menu as="menu" className="relative inline-block text-left">
+      <Menu as="menu" className="relative inline-block">
         <div>
           {!session ? (
             <button
@@ -20,7 +20,7 @@ export default function SignInBtn() {
               Sign In
             </button>
           ) : (
-            <Menu.Button className="inline-flex w-full justify-center rounded-md text-sm font-medium text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
+            <Menu.Button className="inline-flex w-full justify-center rounded-md text-sm font-medium text-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75">
               <div className="flex flex-row items-center gap-1 font-bold">
                 <Image
                   className="h-8 w-auto rounded-full"
@@ -30,8 +30,10 @@ export default function SignInBtn() {
                   alt={session.user.name}
                 />
 
-                <span className="hidden sm:block">{session.user.name}</span>
-                <HiChevronDown className="h-5 w-auto" />
+                <span className="mt-1 hidden sm:block">
+                  {session.user.name}
+                </span>
+                <HiChevronDown className="mt-1 h-5 w-auto" />
               </div>
             </Menu.Button>
           )}
@@ -45,12 +47,12 @@ export default function SignInBtn() {
           leaveFrom="transform opacity-100 scale-100"
           leaveTo="transform opacity-0 scale-95"
         >
-          <Menu.Items className="absolute right-0 mt-1 w-full origin-top-right divide-y divide-gray-100 rounded-md bg-slate-800 shadow-lg ring-1 ring-black/5 focus:outline-none">
+          <Menu.Items className="absolute bottom-full right-0 mt-1 w-full origin-bottom-right divide-y divide-gray-100 rounded-md bg-slate-800 shadow-lg ring-1 ring-black/5 focus:outline-none sm:-bottom-full">
             <Menu.Item>
               <div className="p-2">
                 <button
                   type="button"
-                  className="rounded-md text-center text-sm font-bold duration-75 ease-in hover:text-slate-400"
+                  className="rounded-md text-center text-base font-bold duration-75 ease-in hover:text-slate-400"
                   onClick={() => signOut()}
                 >
                   Sign Out
