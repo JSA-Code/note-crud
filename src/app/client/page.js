@@ -93,7 +93,7 @@ export default function HomeClient() {
   if (status !== "authenticated") {
     return (
       <div className="pulse-animation mt-28 flex items-center justify-center">
-        <p className="text-center text-xl font-semibold">
+        <p className="text-center text-2xl font-semibold">
           Not signed in.
           <br />
           Please sign in to continue
