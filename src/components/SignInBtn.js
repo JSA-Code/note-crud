@@ -15,7 +15,7 @@ export default function SignInBtn() {
           {!session ? (
             <button
               onClick={() => signIn("github")}
-              className="rounded-xl bg-black/20 px-2 py-1 text-base font-bold text-white hover:bg-white/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
+              className="rounded-xl bg-slate-700 px-2 py-1 text-base font-bold text-slate-50 hover:bg-slate-700/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
             >
               Sign In
             </button>

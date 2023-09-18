@@ -15,8 +15,8 @@ export default async function HomeServer() {
 
   if (!session) {
     return (
-      <div className="mt-28 flex items-center justify-center text-center font-semibold">
-        <p className="pulse-animation">
+      <div className="pulse-animation mt-28 flex items-center justify-center">
+        <p className="text-center text-xl font-semibold">
           Not signed in.
           <br />
           Please sign in to continue
@@ -45,7 +45,7 @@ export default async function HomeServer() {
   ));
 
   return (
-    <div className="mt-10 flex gap-10">
+    <div className="mx-4 mt-10 flex gap-10">
       <p className="font-bold">
         Here we are performing server-side data fetching.
       </p>

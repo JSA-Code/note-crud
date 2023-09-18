@@ -67,10 +67,10 @@ export default function HomeClient() {
 
   if (status === "loading") {
     return (
-      <div className="flex justify-center items-center mt-28 text-center font-semibold">
+      <div className="mt-28 flex items-center justify-center text-center font-semibold">
         <svg
           aria-hidden="true"
-          className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-200 fill-blue-600"
+          className="mr-2 h-8 w-8 animate-spin fill-blue-600 text-gray-200 dark:text-gray-200"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -92,8 +92,8 @@ export default function HomeClient() {
 
   if (status !== "authenticated") {
     return (
-      <div className="flex justify-center items-center mt-28 text-center font-semibold">
-        <p className="pulse-animation">
+      <div className="pulse-animation mt-28 flex items-center justify-center">
+        <p className="text-center text-xl font-semibold">
           Not signed in.
           <br />
           Please sign in to continue
@@ -104,10 +104,10 @@ export default function HomeClient() {
 
   if (isLoading) {
     return (
-      <div className="flex justify-center items-center mt-28 text-center font-semibold">
+      <div className="mt-28 flex items-center justify-center text-center font-semibold">
         <svg
           aria-hidden="true"
-          className="w-8 h-8 mr-2 text-gray-200 animate-spin dark:text-gray-200 fill-blue-600"
+          className="mr-2 h-8 w-8 animate-spin fill-blue-600 text-gray-200 dark:text-gray-200"
           viewBox="0 0 100 101"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -128,9 +128,9 @@ export default function HomeClient() {
 
   const notesList = notes?.map((note) => (
     <li key={note._id}>
-      <div className="px-10 py-8 my-3 flex items-center bg-slate-700 border text-slate-200 font-semibold">
+      <div className="my-3 flex items-center border bg-slate-700 px-10 py-8 font-semibold text-slate-200">
         <textarea
-          className="transition ease-in duration-100 resize-none break-words hover:bg-[#d3d3d3] hover:text-slate-900 focus:text-slate-900 hover:cursor-pointer focus:bg-[#d3d3d3] bg-transparent placeholder-slate-100 placeholder-opacity-30 hover:placeholder-transparent"
+          className="resize-none break-words bg-transparent transition duration-100 ease-in placeholder:text-slate-100 placeholder:text-opacity-30 hover:cursor-pointer hover:bg-[#d3d3d3] hover:text-slate-900 hover:placeholder:text-transparent focus:bg-[#d3d3d3] focus:text-slate-900"
           placeholder="Enter Title"
           type="text"
           onFocus={(e) => (e.target.placeholder = "")}
@@ -144,7 +144,7 @@ export default function HomeClient() {
                   // No changes
                   return oNote;
                 }
-              })
+              }),
             )
           }
           onKeyDown={onKeyDown}
@@ -156,7 +156,7 @@ export default function HomeClient() {
   ));
 
   return (
-    <>
+    <div className="mx-4">
       <ToastContainer
         position="bottom-right"
         autoClose={1500}
@@ -169,7 +169,7 @@ export default function HomeClient() {
         pauseOnHover
         theme="dark"
       />
-      <div className="flex gap-10 mt-10">
+      <div className="mt-10 flex gap-10">
         <p className="font-bold">
           This is a protected page provided by NextAuthJs. Our API is also
           protected to ensure that only authenticated users can access it. Here
@@ -184,6 +184,6 @@ export default function HomeClient() {
         </p>
         <ul className="flex flex-col items-baseline">{notesList}</ul>
       </div>
-    </>
+    </div>
   );
 }

@@ -50,7 +50,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       <div
-        className="fixed inset-x-0 bottom-0 block h-14 bg-slate-800 sm:hidden"
+        className="fixed inset-x-0 bottom-0 block h-16 bg-slate-800 sm:hidden"
         id="mobile-menu"
       >
         <div className="flex h-full w-auto items-center justify-around">

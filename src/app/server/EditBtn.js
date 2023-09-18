@@ -70,7 +70,7 @@ export default function EditBtn({ note }) {
       />
       <button
         onClick={openModal}
-        className="font-bold text-white py-3 px-6 w-fit"
+        className="w-fit px-6 py-3 font-bold text-white"
       >
         <HiPencilAlt size={24} />
       </button>
@@ -86,12 +86,12 @@ export default function EditBtn({ note }) {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-slate-900 bg-opacity-50 backdrop-blur-md" />
+            <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-md" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
             {/* min-h-full items-center */}
-            <div className="flex mt-28 justify-center p-4 text-center">
+            <div className="mt-28 flex justify-center p-4 text-center">
               <Transition.Child
                 as={Fragment}
                 enter="ease-out duration-300"
@@ -101,7 +101,7 @@ export default function EditBtn({ note }) {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-slate-700 p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md overflow-hidden rounded-2xl bg-slate-700 p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-100"
@@ -116,20 +116,20 @@ export default function EditBtn({ note }) {
                       <input
                         onChange={(e) => setTitle(e.target.value)}
                         value={title}
-                        className="border border-slate-100 px-8 py-2 bg-slate-300 placeholder-slate-900 placeholder-opacity-70 font-medium text-slate-900"
+                        className="border border-slate-100 bg-slate-300 px-8 py-2 font-medium text-slate-900 placeholder:text-slate-900 placeholder:text-opacity-70"
                         type="text"
                         placeholder="Notes Title"
                       />
                       <button
                         type="submit"
-                        className="inline-flex justify-center rounded-md border border-transparent bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-100 hover:text-slate-900 hover:bg-slate-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
+                        className="inline-flex justify-center rounded-md border border-transparent bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-100 hover:bg-slate-500 hover:text-slate-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400 focus-visible:ring-offset-2"
                       >
                         Submit
                       </button>
                       <button
                         type="button"
                         onClick={closeModal}
-                        className="rounded-md bg-slate-200 bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                        className="rounded-md bg-slate-500 px-4 py-2 text-sm font-medium text-slate-50 hover:bg-slate-500/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
                       >
                         Cancel
                       </button>

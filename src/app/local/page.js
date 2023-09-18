@@ -69,7 +69,7 @@ export default function HomeLocal() {
     <li key={index}>
       <div className="my-3 flex items-center border bg-slate-700 px-10 py-8 font-semibold text-slate-200">
         <textarea
-          className="resize-none break-words bg-transparent placeholder-slate-100 placeholder-opacity-30 transition duration-100 ease-in hover:cursor-pointer hover:bg-[#d3d3d3] hover:text-slate-900 hover:placeholder-transparent focus:bg-[#d3d3d3] focus:text-slate-900"
+          className="resize-none break-words bg-transparent transition duration-100 ease-in placeholder:text-slate-100 placeholder:text-opacity-30 hover:cursor-pointer hover:bg-[#d3d3d3] hover:text-slate-900 hover:placeholder:text-transparent focus:bg-[#d3d3d3] focus:text-slate-900"
           placeholder="Enter Title"
           type="text"
           onFocus={(e) => (e.target.placeholder = "")}
@@ -95,7 +95,7 @@ export default function HomeLocal() {
   ));
 
   return (
-    <>
+    <div className="mx-4">
       <ToastContainer
         position="bottom-right"
         autoClose={1500}
@@ -112,7 +112,7 @@ export default function HomeLocal() {
       <button
         type="button"
         onClick={openModal}
-        className="mt-4 rounded-xl bg-blue-200 bg-opacity-20 px-2 py-1 text-base font-bold text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+        className="mt-4 rounded-xl bg-slate-700 px-2 py-1 text-base font-bold text-slate-50 hover:bg-slate-700/75 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/75"
       >
         Local Add Note
       </button>
@@ -136,7 +136,7 @@ export default function HomeLocal() {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="fixed inset-0 bg-slate-900 bg-opacity-50 backdrop-blur-md" />
+            <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-md" />
           </Transition.Child>
 
           <div className="fixed inset-0 overflow-y-auto">
@@ -151,7 +151,7 @@ export default function HomeLocal() {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-2xl bg-slate-700 p-6 text-left align-middle shadow-xl transition-all">
+                <Dialog.Panel className="w-full max-w-md overflow-hidden rounded-2xl bg-slate-700 p-6 text-left align-middle shadow-xl transition-all">
                   <Dialog.Title
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-100"
@@ -166,7 +166,7 @@ export default function HomeLocal() {
                       <input
                         onChange={(e) => setTitle(e.target.value)}
                         value={title}
-                        className="border border-slate-100 bg-slate-300 px-8 py-2 font-medium text-slate-900 placeholder-slate-900 placeholder-opacity-70"
+                        className="border border-slate-100 bg-slate-300 px-8 py-2 font-medium text-slate-900 placeholder:text-slate-900 placeholder:text-opacity-70"
                         type="text"
                         placeholder="Notes Title"
                       />
@@ -179,7 +179,7 @@ export default function HomeLocal() {
                       <button
                         type="button"
                         onClick={closeModal}
-                        className="rounded-md bg-slate-200 bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                        className="rounded-md bg-slate-500 px-4 py-2 text-sm font-medium text-white hover:bg-slate-500/30 focus:outline-none focus-visible:ring-2  focus-visible:ring-white/75"
                       >
                         Cancel
                       </button>
@@ -191,6 +191,6 @@ export default function HomeLocal() {
           </div>
         </Dialog>
       </Transition>
-    </>
+    </div>
   );
 }

@@ -116,7 +116,7 @@ export default function AddBtn() {
                       <input
                         onChange={(e) => setTitle(e.target.value)}
                         value={title}
-                        className="border border-slate-100 bg-slate-300 px-8 py-2 font-medium text-slate-900 placeholder-opacity-70 placeholder:text-slate-900"
+                        className="border border-slate-100 bg-slate-300 px-8 py-2 font-medium text-slate-900 placeholder:text-slate-900 placeholder:text-opacity-70"
                         type="text"
                         placeholder="Notes Title"
                       />
@@ -129,7 +129,7 @@ export default function AddBtn() {
                       <button
                         type="button"
                         onClick={closeModal}
-                        className="rounded-md bg-slate-200 bg-opacity-20 px-4 py-2 text-sm font-medium text-white hover:bg-opacity-30 focus:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-opacity-75"
+                        className="rounded-md bg-slate-500 px-4 py-2 text-sm font-medium text-white hover:bg-slate-500/30 focus:outline-none focus-visible:ring-2  focus-visible:ring-white/75"
                       >
                         Cancel
                       </button>
