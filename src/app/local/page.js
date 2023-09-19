@@ -2,7 +2,7 @@
 
 import { useState, useEffect, Fragment } from "react";
 import { Dialog, Transition } from "@headlessui/react";
-// import DeleteBtn from "@/components/DeleteBtn";
+import { HiOutlineTrash } from "react-icons/hi";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -58,11 +58,21 @@ export default function HomeLocal() {
     }
   };
 
-  const localHandleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setNotes([...notes, title]);
     localStorage.setItem("LocalNotes", JSON.stringify([...notes, title]));
     closeModal();
+  };
+
+  const deleteNote = (index) => {
+    const newNotes = notes.filter((_, i) => i !== index);
+    setNotes(newNotes);
+    localStorage.setItem("LocalNotes", JSON.stringify(newNotes));
+
+    // setNotes(notes.filter((_, i) => i !== index));
+    // console.log(`NOTES:\n${JSON.stringify([...notes])}`);
+    // localStorage.setItem("LocalNotes", JSON.stringify(notes));
   };
 
   const notesList = notes?.map((note, index) => (
@@ -89,7 +99,9 @@ export default function HomeLocal() {
           onKeyDown={onKeyDown}
           onBlur={onNotFocus}
         />
-        {/* <DeleteBtn id={note._id} /> */}
+        <button className="ml-4 text-red-500" onClick={() => deleteNote(index)}>
+          <HiOutlineTrash size={24} />
+        </button>
       </div>
     </li>
   ));
@@ -160,7 +172,7 @@ export default function HomeLocal() {
                   </Dialog.Title>
                   <div className="my-2">
                     <form
-                      onSubmit={localHandleSubmit}
+                      onSubmit={handleSubmit}
                       className="flex flex-col gap-3"
                     >
                       <input
