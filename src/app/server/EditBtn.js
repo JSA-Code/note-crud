@@ -106,7 +106,7 @@ export default function EditBtn({ note }) {
                     as="h3"
                     className="text-lg font-medium leading-6 text-gray-100"
                   >
-                    Create your new note below
+                    Edit your note
                   </Dialog.Title>
                   <div className="my-2">
                     <form

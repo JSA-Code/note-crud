@@ -61,7 +61,7 @@ export default function AddBtn() {
 
   return (
     <>
-      {session && pathname !== "/local" && (
+      {session && pathname !== "/local" && pathname !== "/" && (
         <button
           type="button"
           onClick={openModal}

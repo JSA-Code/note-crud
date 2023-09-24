@@ -1,7 +1,9 @@
-export default function AddNote() {
+import Skeleton from "@/components/Skeleton";
+
+export default function TestPage() {
   return (
-    <>
-      <div className="fixed inset-0 flex items-center justify-center">Hey</div>
-    </>
+    <div className="flex flex-col items-center">
+      <Skeleton />
+    </div>
   );
 }

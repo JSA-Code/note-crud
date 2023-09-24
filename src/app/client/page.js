@@ -11,8 +11,8 @@ const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 export default function HomeClient() {
   const { data, isLoading } = useSWR("/api/notes", fetcher);
-  const { status } = useSession();
   const [notes, setNotes] = useState();
+  const { status } = useSession();
   const notify = () => {
     toast.success("Updated Successfully!");
   };
@@ -48,11 +48,9 @@ export default function HomeClient() {
 
         notify();
 
-        // if (typeof window !== "undefined" && window.localStorage) {
         localStorage.setItem("oldNotes", JSON.stringify(notes));
         // console.log(`OLD NOTES:\n${localStorage.getItem("oldNotes")}`);
         // console.log(`NOTES:\n${JSON.stringify(notes)}`);
-        // }
       } catch (error) {
         console.log(`Cannot update due to ${error}`);
       }
@@ -169,8 +167,8 @@ export default function HomeClient() {
         pauseOnHover
         theme="dark"
       />
-      <div className="mt-10 flex gap-10">
-        <p className="font-bold">
+      <div className="flex flex-col items-center gap-10 pt-5 md:flex-row md:justify-center">
+        <p className="text-center font-bold md:text-left">
           This is a protected page provided by NextAuthJs. Our API is also
           protected to ensure that only authenticated users can access it. Here
           we are performing client-side data fetching by utilizing useSWR and

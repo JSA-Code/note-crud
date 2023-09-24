@@ -60,8 +60,8 @@ export default function HomeLocal() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setNotes([...notes, title]);
     localStorage.setItem("LocalNotes", JSON.stringify([...notes, title]));
+    // console.log("LocalNotes", JSON.stringify(notes));
     closeModal();
   };
 
@@ -129,8 +129,8 @@ export default function HomeLocal() {
         Local Add Note
       </button>
 
-      <div className="mt-10 flex gap-10">
-        <p className="font-bold">
+      <div className="flex flex-col items-center gap-10 pt-5 md:flex-row md:justify-center">
+        <p className="text-center font-bold md:text-left">
           This is not a protected page provided by NextAuthJs. We are using
           local storage to store the data
         </p>

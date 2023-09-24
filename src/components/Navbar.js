@@ -24,7 +24,7 @@ export default function Navbar() {
   }
 
   return (
-    <div className="mx-auto bg-gray-800 px-2">
+    <nav className="bg-gray-800 px-2">
       <div className="hidden sm:block">
         <div className="flex items-center justify-center space-x-10">
           <HiMiniCircleStack size={30} />
@@ -69,26 +69,7 @@ export default function Navbar() {
           <AddBtn />
           <SignInBtn />
         </div>
-        {/* <div className="space-y-1 px-2 pb-3 pt-2">
-          {navigation.map((item) => (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={classNames(
-                item.current
-                  ? "bg-gray-900 text-white"
-                  : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                "block rounded-md px-3 py-2 text-lg font-bold",
-              )}
-              aria-current={item.current ? "page" : undefined}
-            >
-              {item.name}
-            </Link>
-          ))}
-          <AddBtn />
-          <SignInBtn />
-        </div> */}
       </div>
-    </div>
+    </nav>
   );
 }
