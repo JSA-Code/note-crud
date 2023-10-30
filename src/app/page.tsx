@@ -3,6 +3,7 @@ import { HiUser } from "react-icons/hi";
 import { getServerSession } from "next-auth";
 
 export default async function Home() {
+  //ADD TYPE HERE
   const session = await getServerSession();
   return (
     // <div className="mx-auto flex max-w-2xl flex-col">

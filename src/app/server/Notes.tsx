@@ -1,5 +1,5 @@
 import { getServerSession } from "next-auth";
-import Note from "@/models/note";
+import NoteModel from "@/models/note";
 import DeleteBtn from "@/components/DeleteBtn";
 import EditBtn from "./EditBtn";
 
@@ -19,7 +19,7 @@ export default async function Notes() {
   }
 
   const notes = JSON.parse(
-    JSON.stringify(await Note.find({ email: session.user.email })),
+    JSON.stringify(await NoteModel.find({ email: session.user.email })),
   );
   await new Promise((resolve) => setTimeout(resolve, 1000));
 

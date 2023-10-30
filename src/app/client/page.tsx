@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import { useState, useEffect } from "react";
+import { useState, useEffect, FocusEvent, KeyboardEvent } from "react";
 import { useSession } from "next-auth/react";
 import DeleteBtn from "@/components/DeleteBtn";
 import { ToastContainer, toast } from "react-toastify";
@@ -27,7 +27,7 @@ export default function HomeClient() {
     // console.log("USE EFFECT");
   }, [data]);
 
-  const onNotFocus = async (e, id) => {
+  const onNotFocus = async (e: FocusEvent<HTMLTextAreaElement>, id: Number) => {
     e.preventDefault();
     // console.log(`IS STATE EQUAL:\n${isStateEqual()}`);
 
@@ -57,9 +57,9 @@ export default function HomeClient() {
     }
   };
 
-  const onKeyDown = (e) => {
+  const onKeyDown = (e: KeyboardEvent) => {
     if (e.key === "Enter" || e.key === "Escape") {
-      e.target.blur();
+      (e.target as HTMLElement).blur();
     }
   };
 
@@ -123,18 +123,19 @@ export default function HomeClient() {
       </div>
     );
   }
-
-  const notesList = notes?.map((note) => (
+  // const notesList = notes?.map((note) => (
+  const notesList = (notes || []).map((note) => (
     <li key={note._id}>
       <div className="my-3 flex items-center border bg-slate-700 px-10 py-8 font-semibold text-slate-200">
         <textarea
           className="resize-none break-words bg-transparent transition duration-100 ease-in placeholder:text-slate-100 placeholder:text-opacity-30 hover:cursor-pointer hover:bg-[#d3d3d3] hover:text-slate-900 hover:placeholder:text-transparent focus:bg-[#d3d3d3] focus:text-slate-900"
           placeholder="Enter Title"
-          type="text"
+          // type="text"
           onFocus={(e) => (e.target.placeholder = "")}
           value={note.title}
           onChange={(e) =>
             setNotes(
+              // notes.map((oNote) => {
               notes.map((oNote) => {
                 if (oNote._id === note._id) {
                   return { ...oNote, title: e.target.value };
